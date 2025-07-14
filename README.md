@@ -1,302 +1,68 @@
-# Capybara.Chat
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Capybara Chat Pro</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script defer src="script.js"></script>
-</head>
-<body>
-  <div id="login-screen" class="screen">
-    <div class="login-box">
-      <h2>🐾 Capybara Chat Pro</h2>
-      <input type="text" id="username" placeholder="Usuario" />
-      <input type="password" id="password" placeholder="Contraseña" />
-      <button onclick="login()">Entrar</button>
-    </div>
-  </div>
+# 🐾 Capybara Chat Pro
 
-  <div id="chat-screen" class="screen hidden">
-    <header>
-      <img src="data:image/jpeg;base64,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" alt="Capibara"/>
-      <h1>Capybara Chat</h1>
-    </header>
+Capybara Chat es una aplicación de mensajería web básica con diseño responsive, funciones útiles y una estética amigable inspirada en WhatsApp.  
+¡Ideal para practicar HTML, CSS y JavaScript!
 
-  <main>
-      <div id="chat-window"></div>
-      <div class="input-area">
-        <button onclick="toggleEmojiPicker()">😊</button>
-        <input type="text" id="message-input" placeholder="Escribí tu mensaje..." />
-        <button onclick="sendMessage()">📤 Enviar</button>
-        <div class="tools">
-          <button onclick="getLocation()" title="Ubicación"><i class="fas fa-map-marker-alt"></i></button>
-          <button onclick="toggleNote()" title="Nota"><i class="fas fa-sticky-note"></i></button>
-          <button onclick="toggleDate()" title="Fecha"><i class="fas fa-calendar-day"></i></button>
-        </div>
-      </div>
-    </main>
+---
 
-  <div id="emoji-picker" class="tool-box hidden">
-      😀 😃 😄 😁 😆 😅 😂 🤣 😊 😇 🙂 🙃 😉 😍 😘 😜 😎 🤓 🤩 😏 😤 😱 🥺 😢 😡 🐾
-    </div>
+## 🌐 Funcionalidades
 
-  <div id="note-box" class="tool-box hidden">
-      <textarea id="notes" placeholder="Escribí una nota..."></textarea>
-      <button onclick="saveNotes()">Guardar Nota</button>
-    </div>
+✅ Registro de usuario (guardado en `localStorage`)  
+✅ Envío de mensajes con burbujas diferenciadas (enviado/recibido)  
+✅ Envío de ubicación en tiempo real (usa `navigator.geolocation`)  
+✅ Guardar notas personales  
+✅ Guardar fechas importantes  
+✅ Interfaz responsive (adaptada a celulares)  
+✅ Estilo limpio y moderno con íconos divertidos  
+✅ Todo el código en un solo archivo `.html` (fácil de usar)
 
-  <div id="date-box" class="tool-box hidden">
-      <input type="date" id="important-date" />
-      <button onclick="saveDate()">Guardar Fecha</button>
-    </div>
-  </div>
-</body>
-</html>
+---
 
-* {
-  box-sizing: border-box;
-}
+## 📷 Vista previa
 
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f0ece3;
-}
+![Capybara Chat Pro Screenshot](https://placehold.co/600x300?text=Capybara+Chat+Pro)
 
-.screen {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+> ⚠️ Reemplazá esta imagen con una captura real de tu app cuando la subas.
 
-.login-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 90%;
-  max-width: 400px;
-}
+---
 
-.login-box input, .login-box button {
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-}
+## 🚀 Cómo usar
 
-.login-box button {
-  background-color: #a67c52;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
+1. Descargá el archivo `capybara_chat.html`.
+2. Abrilo en tu navegador.
+3. Registrate con un nombre de usuario y contraseña.
+4. Empezá a chatear, guardar notas y fechas.
 
-header {
-  display: flex;
-  align-items: center;
-  background-color: #a67c52;
-  color: white;
-  padding: 10px;
-}
+---
 
-header img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
+## 🛠 Tecnologías usadas
 
-main {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 70px);
-}
+- HTML5
+- CSS3
+- JavaScript puro
+- LocalStorage
 
-#chat-window {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-}
+---
 
-.sent {
-  align-self: flex-end;
-  background-color: #d1ffd6;
-  padding: 10px;
-  border-radius: 12px;
-  margin: 5px;
-  max-width: 70%;
-}
+## 📁 Estructura del proyecto
 
-.received {
-  align-self: flex-start;
-  background-color: #e0e0e0;
-  padding: 10px;
-  border-radius: 12px;
-  margin: 5px;
-  max-width: 70%;
-}
 
-.input-area {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background-color: #eee;
-  gap: 5px;
-}
+---
 
-.input-area input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
+## 🧠 Autor
 
-.input-area button {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background-color: #a67c52;
-  color: white;
-  cursor: pointer;
-}
+**Mathias Vázquez** – [GitHub](https://github.com/tu-usuario)
 
-.tool-box {
-  padding: 10px;
-  background: #fff8dc;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 10px;
-}
+---
 
-.tool-box button {
-  background-color: #6db079;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 10px;
-}
+## ❤️ Inspiración
 
-#emoji-picker span {
-  cursor: pointer;
-  padding: 5px;
-  font-size: 1.2rem;
-}
+Este proyecto está inspirado en WhatsApp, pero con el toque simpático de una capibara 🐾  
+Ideal para estudiantes, presentaciones o como base para crear una app real.
 
-.hidden {
-  display: none;
-}
+---
 
-@media (max-width: 600px) {
-  .login-box {
-    width: 95%;
-  }
+## 📌 Nota
 
-  .input-area {
-    flex-direction: column;
-  }
-}
+Este chat no conecta a internet ni a otros usuarios. Solo guarda y muestra datos **localmente en tu navegador**.
 
-function login() {
-  const user = document.getElementById('username').value;
-  const pass = document.getElementById('password').value;
-  if (user && pass) {
-    localStorage.setItem('capyUser', user);
-    localStorage.setItem('capyPass', pass);
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('chat-screen').classList.remove('hidden');
-    loadStoredData();
-  } else {
-    alert('Ingresá usuario y contraseña.');
-  }
-}
-
-function sendMessage() {
-  const input = document.getElementById('message-input');
-  const chatWindow = document.getElementById('chat-window');
-  if (input.value.trim() !== '') {
-    const msg = document.createElement('div');
-    msg.textContent = input.value;
-    msg.className = 'sent';
-    chatWindow.appendChild(msg);
-
-  const messages = JSON.parse(localStorage.getItem('messages')) || [];
-  messages.push({ type: 'sent', content: input.value });
-  ocalStorage.setItem('messages', JSON.stringify(messages));
-
-  input.value = '';
-  chatWindow.scrollTop = chatWindow.scrollHeight;
-  }
-}
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      const chatWindow = document.getElementById('chat-window');
-      const msg = document.createElement('div');
-      msg.className = 'received';
-      msg.textContent = `📍 Lat: ${position.coords.latitude}, Long: ${position.coords.longitude}`;
-      chatWindow.appendChild(msg);
-
-  const messages = JSON.parse(localStorage.getItem('messages')) || [];
-      messages.push({ type: 'received', content: msg.textContent });
-      localStorage.setItem('messages', JSON.stringify(messages));
-    });
-  }
-}
-
-function toggleNote() {
-  document.getElementById('note-box').classList.toggle('hidden');
-}
-
-function toggleDate() {
-  document.getElementById('date-box').classList.toggle('hidden');
-}
-
-function saveNotes() {
-  const notes = document.getElementById('notes').value;
-  localStorage.setItem('notes', notes);
-  alert("Nota guardada ✅");
-}
-
-function saveDate() {
-  const date = document.getElementById('important-date').value;
-  localStorage.setItem('importantDate', date);
-  alert("Fecha importante guardada 📅");
-}
-
-function toggleEmojiPicker() {
-  document.getElementById('emoji-picker').classList.toggle('hidden');
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById('emoji-picker').addEventListener("click", function(e) {
-    if (e.target && e.target.textContent) {
-      document.getElementById('message-input').value += e.target.textContent;
-    }
-  });
-});
-
-function loadStoredData() {
-  const messages = JSON.parse(localStorage.getItem('messages')) || [];
-  const chatWindow = document.getElementById('chat-window');
-  messages.forEach(msg => {
-    const div = document.createElement('div');
-    div.className = msg.type;
-    div.textContent = msg.content;
-    chatWindow.appendChild(div);
-  });
-
-  document.getElementById('notes').value = localStorage.getItem('notes') || '';
-  document.getElementById('important-date').value = localStorage.getItem('importantDate') || '';
-}
